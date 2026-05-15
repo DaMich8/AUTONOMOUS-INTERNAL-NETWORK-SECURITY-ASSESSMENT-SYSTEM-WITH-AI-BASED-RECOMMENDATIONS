@@ -1,0 +1,109 @@
+{
+  "model_name": "weighted_contextual_risk_model",
+  "version": "1.0",
+  "description": "Konfigūruojamas rizikos prioritetizavimo modelis hostams ir radiniams vertinti. Visi komponentai normalizuojami į 0–100 skalę.",
+  "score_range": {
+    "min": 0,
+    "max": 100
+  },
+  "formula": "R = wV*V + wE*E + wK*K + wC*C + wL*L + wA*A",
+  "weights": {
+    "V": 0.35,
+    "E": 0.20,
+    "K": 0.15,
+    "C": 0.15,
+    "L": 0.10,
+    "A": 0.05
+  },
+  "component_labels": {
+    "V": "Pažeidžiamumo rimtumas pagal CVSS",
+    "E": "Išnaudojimo tikimybė pagal EPSS",
+    "K": "Žinomai išnaudojamo pažeidžiamumo požymis pagal CISA KEV",
+    "C": "Įrenginio kritiškumas tinkle",
+    "L": "Endpoint / Windows / ESET logų anomalijos",
+    "A": "Atakos paviršius pagal atvirus servisus"
+  },
+  "risk_levels": [
+    {"level": "žema", "min": 0, "max": 29},
+    {"level": "vidutinė", "min": 30, "max": 59},
+    {"level": "aukšta", "min": 60, "max": 79},
+    {"level": "kritinė", "min": 80, "max": 100}
+  ],
+  "device_criticality": {
+    "gateway_or_multi_service_network_device": 90,
+    "managed_network_device": 80,
+    "database_or_application_server": 85,
+    "mail_or_application_server": 80,
+    "linux_or_unix_server": 75,
+    "windows_endpoint_or_server": 70,
+    "file_sharing_device": 70,
+    "web_managed_device": 60,
+    "printer_or_print_service_device": 45,
+    "iot_or_embedded_device": 40,
+    "linux_or_unix_host": 50,
+    "unclassified_network_host": 40,
+    "unclassified_active_host": 25
+  },
+  "attack_surface_rules": {
+    "risky_tcp_ports": {
+      "21": 20,
+      "22": 10,
+      "23": 40,
+      "80": 10,
+      "111": 20,
+      "135": 25,
+      "139": 25,
+      "443": 10,
+      "445": 35,
+      "3389": 40,
+      "5900": 35,
+      "6379": 45,
+      "9200": 45,
+      "27017": 45
+    },
+    "service_flags": {
+      "smbv1_enabled": 40,
+      "smb_signing_disabled": 25,
+      "smb_guest_or_share_auth": 35,
+      "rdp_present": 30,
+      "web_admin_interface": 20,
+      "weak_tls": 25,
+      "snmp_present": 20,
+      "snmp_default_community": 40,
+      "weak_ssh_algorithms": 20
+    },
+    "open_ports_bonus": {
+      "threshold": 8,
+      "score": 15
+    },
+    "max_score": 100
+  },
+  "log_anomaly_rules": {
+    "failed_logon_thresholds": [
+      {"count": 5, "score": 20},
+      {"count": 20, "score": 50},
+      {"count": 50, "score": 80}
+    ],
+    "account_lockout_score": 40,
+    "special_privilege_logon_score": 20,
+    "new_user_created_score": 60,
+    "user_added_to_admin_group_score": 80,
+    "audit_log_cleared_score": 90,
+    "eset_detection_score": 70,
+    "eset_blocked_url_score": 25,
+    "powershell_scriptblock_score": 20,
+    "wmi_activity_score": 15,
+    "max_score": 100
+  },
+  "missing_data_policy": {
+    "epss_default": 0,
+    "kev_default": 0,
+    "cvss_default": 0,
+    "log_anomaly_default": 0
+  },
+  "validation": {
+    "require_weights_sum_to_one": true,
+    "allow_unknown_device_class": true,
+    "unknown_device_class_score": 40
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "document_type": "expected_findings",
+  "description": "Rankiniu būdu sudarytas laukiamų radinių rinkinys magistrinio darbo eksperimentinei validacijai.",
+  "scope": {
+    "network": "192.168.1.0/24",
+    "environment": "vidinis testinis tinklas",
+    "validation_type": "manual_ground_truth"
+  },
+  "expected_findings": [
+    {
+      "id": "expected_smb_services_192_168_1_170",
+      "rule_id": "smb_service_detected",
+      "host": "192.168.1.170",
+      "category": "network_service",
+      "expected": true,
+      "severity": "vidutinė",
+      "confidence": "aukštas",
+      "reason": "Ankstesniuose nuskaitymuose įrenginys turėjo SMB paslaugas arba su SMB susijusius atvirus prievadus."
+    },
+    {
+      "id": "expected_smb_services_192_168_1_195",
+      "rule_id": "smb_service_detected",
+      "host": "192.168.1.195",
+      "category": "network_service",
+      "expected": true,
+      "severity": "vidutinė",
+      "confidence": "aukštas",
+      "reason": "Skenavimo metu įrenginiui buvo vykdomas SMB papildomos analizės etapas."
+    },
+    {
+      "id": "expected_smb_services_192_168_1_254",
+      "rule_id": "smb_service_detected",
+      "host": "192.168.1.254",
+      "category": "network_service",
+      "expected": true,
+      "severity": "aukšta",
+      "confidence": "aukštas",
+      "reason": "Maršrutizatoriaus arba tinklo įrenginio adresas turėjo SMB požymių ankstesniuose paleidimuose."
+    },
+    {
+      "id": "expected_web_interface_192_168_1_105",
+      "rule_id": "web_service_detected",
+      "host": "192.168.1.105",
+      "category": "web_service",
+      "expected": true,
+      "severity": "vidutinė",
+      "confidence": "aukštas",
+      "reason": "Skenavimo metu aptikta HTTP paslauga 80 prievade."
+    },
+    {
+      "id": "expected_web_interface_192_168_1_195",
+      "rule_id": "web_service_detected",
+      "host": "192.168.1.195",
+      "category": "web_service",
+      "expected": true,
+      "severity": "aukšta",
+      "confidence": "aukštas",
+      "reason": "Įrenginyje aptiktos kelios žiniatinklio paslaugos: 80, 443, 8080 ir 8081 prievadai."
+    },
+    {
+      "id": "expected_web_interface_192_168_1_254",
+      "rule_id": "web_service_detected",
+      "host": "192.168.1.254",
+      "category": "web_service",
+      "expected": true,
+      "severity": "aukšta",
+      "confidence": "aukštas",
+      "reason": "Tinklo įrenginyje aptiktos žiniatinklio valdymo sąsajos 80 ir 8080 prievaduose."
+    },
+    {
+      "id": "expected_tls_findings_192_168_1_128",
+      "rule_id": "tls_configuration_finding",
+      "host": "192.168.1.128",
+      "category": "tls_configuration",
+      "expected": true,
+      "severity": "aukšta",
+      "confidence": "vidutinis",
+      "reason": "TLS audito metu tikrintos 993 ir 995 prievadų paslaugos, todėl šiame įrenginyje tikėtini TLS konfigūracijos radiniai."
+    },
+    {
+      "id": "expected_tls_findings_192_168_1_195",
+      "rule_id": "tls_configuration_finding",
+      "host": "192.168.1.195",
+      "category": "tls_configuration",
+      "expected": true,
+      "severity": "aukšta",
+      "confidence": "vidutinis",
+      "reason": "TLS audito metu tikrinta HTTPS paslauga 443 prievade."
+    },
+    {
+      "id": "expected_ssh_policy_findings_192_168_1_128",
+      "rule_id": "ssh_policy_finding",
+      "host": "192.168.1.128",
+      "category": "ssh_configuration",
+      "expected": true,
+      "severity": "vidutinė",
+      "confidence": "vidutinis",
+      "reason": "Įrenginyje aptikta SSH paslauga, todėl tikėtini SSH konfigūracijos vertinimo radiniai."
+    },
+    {
+      "id": "expected_ssh_policy_findings_192_168_1_195",
+      "rule_id": "ssh_policy_finding",
+      "host": "192.168.1.195",
+      "category": "ssh_configuration",
+      "expected": true,
+      "severity": "vidutinė",
+      "confidence": "vidutinis",
+      "reason": "Įrenginyje aptikta SSH paslauga, todėl tikėtini SSH konfigūracijos vertinimo radiniai."
+    },
+    {
+      "id": "expected_ssh_policy_findings_192_168_1_196",
+      "rule_id": "ssh_policy_finding",
+      "host": "192.168.1.196",
+      "category": "ssh_configuration",
+      "expected": true,
+      "severity": "vidutinė",
+      "confidence": "vidutinis",
+      "reason": "Įrenginyje aptikta SSH paslauga, todėl tikėtini SSH konfigūracijos vertinimo radiniai."
+    },
+    {
+      "id": "expected_cve_findings",
+      "rule_id": "cve_detected",
+      "host": "multiple",
+      "category": "vulnerability",
+      "expected": true,
+      "severity": "aukšta",
+      "confidence": "vidutinis",
+      "reason": "Pažeidžiamumų praturtinimo etape aptikta CVE pagrįstų radinių."
+    },
+    {
+      "id": "expected_new_hosts_detected",
+      "rule_id": "new_host_detected",
+      "host": "multiple",
+      "category": "asset_change",
+      "expected": true,
+      "severity": "vidutinė",
+      "confidence": "aukštas",
+      "reason": "Palyginimo su baseline metu aptikti nauji tinklo įrenginiai."
+    },
+    {
+      "id": "expected_endpoint_events",
+      "rule_id": "endpoint_security_events",
+      "host": "multiple",
+      "category": "endpoint_security",
+      "expected": true,
+      "severity": "vidutinė",
+      "confidence": "vidutinis",
+      "reason": "Endpoint ir ESET įvykių normalizavimo metu apdoroti Windows ir ESET žurnalai."
+    }
+  ],
+  "notes": [
+    "Šis failas nėra automatiškai sugeneruotas radinių sąrašas. Jis rankiniu būdu aprašo, kokių radinių tikimasi testiniame tinkle.",
+    "Failas naudojamas eksperimentinei validacijai, kad būtų galima apskaičiuoti aptikimo kokybės metrikas.",
+    "Jeigu keičiasi testinis tinklas, įrenginiai ar paslaugos, šį failą reikia atnaujinti."
+  ]
+}

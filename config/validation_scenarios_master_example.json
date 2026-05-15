@@ -1,0 +1,64 @@
+{
+  "pipeline_checks": {
+    "enabled": true,
+    "description": "Automatinės patikros magistrinio darbo eksperimentams. Jos tikrina, ar sugeneruoti pagrindiniai artefaktai, ar risk_score yra 0–100, ar rekomendacijos turi įrodymus ir patikrinimo žingsnius."
+  },
+  "lab_scenarios": [
+    {
+      "enabled": false,
+      "id": "LAB_SMB_LEGACY_OR_GUEST",
+      "name": "SMBv1 / guest / SMB signing konfigūracinė rizika",
+      "target_ip": "192.168.1.254",
+      "expected_vulnerability": "Aptinkamas SMB rizikos radinys, susijęs su SMBv1, SMB signing arba guest/share autentifikacija.",
+      "expectations": [
+        {"type": "correlation_rule_present", "rule_id": "smb_legacy_or_guest", "description": "Turi atsirasti SMB koreliacijos radinys."},
+        {"type": "recommendation_contains", "text": "SMB", "description": "Rekomendacijoje turi būti SMB taisymo veiksmai."},
+        {"type": "recommendation_contains", "text": "signing", "description": "Rekomendacijoje turi būti SMB signing patikra arba veiksmas."}
+      ]
+    },
+    {
+      "enabled": false,
+      "id": "LAB_WEB_ADMIN_INTERFACE",
+      "name": "Maršrutizatoriaus arba tinklo įrenginio web administravimo sąsaja",
+      "target_ip": "192.168.1.254",
+      "expected_vulnerability": "Aptinkama web administravimo sąsaja ir sugeneruojama prieigos ribojimo rekomendacija.",
+      "expectations": [
+        {"type": "open_tcp_port", "port": 80, "description": "Hoste turi būti atviras 80/tcp arba kitas HTTP portas."},
+        {"type": "recommendation_contains", "text": "web", "description": "Rekomendacijoje turi būti web sąsajos ribojimas."},
+        {"type": "recommendation_contains", "text": "prieig", "description": "Rekomendacijoje turi būti prieigos ribojimo veiksmas."}
+      ]
+    },
+    {
+      "enabled": false,
+      "id": "LAB_NEW_HOST_MANY_PORTS",
+      "name": "Naujas hostas su daug atvirų TCP prievadų",
+      "target_ip": "192.168.1.170",
+      "expected_vulnerability": "Aptinkamas naujas įrenginys arba hostas su daug atvirų prievadų.",
+      "expectations": [
+        {"type": "correlation_rule_present", "rule_id": "new_host_many_ports", "description": "Turi atsirasti naujo hosto su daug prievadų koreliacija."},
+        {"type": "risk_score_at_least", "min": 10, "description": "Hostas turi turėti apskaičiuotą rizikos balą."},
+        {"type": "recommendation_contains", "text": "inventoriz", "description": "Rekomendacijoje turi būti inventorizavimo veiksmas."}
+      ]
+    },
+    {
+      "enabled": false,
+      "id": "LAB_ESET_REQUIRES_REVIEW",
+      "name": "ESET / endpoint įvykiai kaip peržiūros reikalaujantis radinys",
+      "target_ip": "192.168.1.242",
+      "expected_vulnerability": "Endpoint arba ESET įvykiai turi būti pateikiami kaip requires_human_review, o ne kaip patvirtintas incidentas.",
+      "expectations": [
+        {"type": "recommendation_contains", "text": "requires_human_review", "description": "Ataskaitoje turi būti žmogaus peržiūros statusas."},
+        {"type": "recommendation_contains", "text": "ESET", "description": "Rekomendacijoje turi būti ESET įvykių peržiūra."}
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "enabled": false,
+      "id": "EXPECTED_RULES_HOME_LAB",
+      "description": "Naudojama tik tada, kai laboratorijoje specialiai paruošti tikėtini radiniai.",
+      "expected_findings": ["smb_legacy_or_guest", "new_host_many_ports"],
+      "expected_absent_findings": []
+    }
+  ]
+}

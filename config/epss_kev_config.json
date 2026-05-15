@@ -1,0 +1,10 @@
+{
+  "description": "EPSS/KEV praturtinimo konfigūracija. EPSS ir KEV naudojami tik CVE prioritetizavimui ir risk_engine E/K komponentams.",
+  "cache_ttl_hours": 24,
+  "epss_source": "https://api.first.org/data/v1/epss",
+  "kev_sources": [
+    "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+    "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json"
+  ],
+  "offline_mode_env": "EPSS_KEV_OFFLINE=1"
+}

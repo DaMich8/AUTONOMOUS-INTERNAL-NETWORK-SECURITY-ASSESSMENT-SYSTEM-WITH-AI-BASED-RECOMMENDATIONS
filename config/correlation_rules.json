@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "description": "Konfigūruojamos koreliacijos taisyklės tinklo skenavimo, Windows ir ESET įvykiams susieti.",
+  "thresholds": {
+    "failed_logons_medium": 5,
+    "failed_logons_high": 20,
+    "failed_logons_critical": 50,
+    "new_host_many_ports": 8,
+    "many_open_ports": 10,
+    "powershell_events_medium": 10,
+    "eset_rows_medium": 5,
+    "eset_rows_high": 20
+  },
+  "risk_increase": {
+    "rdp_failed_logons": 25,
+    "rdp_success_after_failures": 30,
+    "smb_legacy_or_guest": 30,
+    "snmp_default_community": 25,
+    "new_host_many_ports": 20,
+    "web_admin_with_vulns": 25,
+    "weak_tls_web": 15,
+    "powershell_activity": 15,
+    "eset_activity": 20,
+    "audit_log_cleared": 40,
+    "account_change": 30
+  },
+  "mitre_mapping": {
+    "rdp_failed_logons": [{"tactic": "Credential Access", "technique": "T1110 Brute Force"}],
+    "rdp_success_after_failures": [{"tactic": "Initial Access", "technique": "T1078 Valid Accounts"}],
+    "smb_legacy_or_guest": [{"tactic": "Lateral Movement", "technique": "T1021.002 SMB/Windows Admin Shares"}],
+    "snmp_default_community": [{"tactic": "Discovery", "technique": "T1046 Network Service Discovery"}],
+    "new_host_many_ports": [{"tactic": "Discovery", "technique": "T1046 Network Service Discovery"}],
+    "web_admin_with_vulns": [{"tactic": "Initial Access", "technique": "T1190 Exploit Public-Facing Application"}],
+    "weak_tls_web": [{"tactic": "Initial Access", "technique": "T1190 Exploit Public-Facing Application"}],
+    "powershell_activity": [{"tactic": "Execution", "technique": "T1059.001 PowerShell"}],
+    "eset_activity": [{"tactic": "Defense Evasion", "technique": "T1562 Impair Defenses"}],
+    "audit_log_cleared": [{"tactic": "Defense Evasion", "technique": "T1070.001 Clear Windows Event Logs"}],
+    "account_change": [{"tactic": "Persistence", "technique": "T1136 Create Account"}]
+  }
+}

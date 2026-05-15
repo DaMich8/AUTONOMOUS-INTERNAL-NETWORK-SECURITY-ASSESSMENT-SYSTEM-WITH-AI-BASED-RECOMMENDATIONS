@@ -1,0 +1,11 @@
+{
+  "enabled_by_default": false,
+  "usage": "full_assessment.py visada sugeneruoja final_ai_input_latest.json ir deterministinę local_ai_recommendations_latest.md santrauką. Vietinis Ollama LLM naudojamas tik nustatius LOCAL_LLM_ENABLED=1.",
+  "ollama_url": "http://127.0.0.1:11434/api/generate",
+  "default_model": "qwen2.5:7b-instruct",
+  "resource_policy": {
+    "keep_alive": 0,
+    "num_parallel": 1,
+    "max_loaded_models": 1
+  }
+}

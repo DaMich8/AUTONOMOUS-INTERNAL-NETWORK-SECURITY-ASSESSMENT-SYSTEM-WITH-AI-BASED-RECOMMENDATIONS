@@ -1,0 +1,36 @@
+{
+  "description": "Magistrinio darbo eksperimentinis planas autonominei tinklo saugumo vertinimo sistemai.",
+  "experiments": [
+    {
+      "id": "EXP-1",
+      "name": "Kontrolinis deterministinis rekomendacijų generatorius",
+      "method": "structured_rules",
+      "purpose": "Parodyti bazinę sistemos kokybę be LLM ir be išorinio API.",
+      "command": "cd ~/network-thesis-GIT/src && source ~/network-thesis-GIT/.env && LOCAL_LLM_ENABLED=0 OPENAI_API_ENABLED=0 RECOMMENDATION_DELIVERY_ENABLED=1 python3 full_assessment.py",
+      "primary_metrics": ["duration_seconds", "recommendation_count", "structural_quality_score_avg", "required_field_coverage_percent", "verification_steps_avg"]
+    },
+    {
+      "id": "EXP-2",
+      "name": "Vietinis Ollama LLM",
+      "method": "local_ollama_llm",
+      "purpose": "Įvertinti, ar Raspberry Pi gali lokaliai sugeneruoti kokybiškesnes rekomendacijas ir kokia yra laiko bei energijos kaina.",
+      "command": "cd ~/network-thesis-GIT/src && source ~/network-thesis-GIT/.env && LOCAL_LLM_ENABLED=1 LOCAL_LLM_TIMEOUT=3600 OPENAI_API_ENABLED=0 RECOMMENDATION_DELIVERY_ENABLED=1 python3 full_assessment.py",
+      "primary_metrics": ["llm_duration_seconds", "estimated_energy_wh", "recommendation_count", "structural_quality_score_avg", "evidence_items_avg", "verification_steps_avg"]
+    },
+    {
+      "id": "EXP-3",
+      "name": "ChatGPT/OpenAI API rekomendacijos",
+      "method": "chatgpt_openai",
+      "purpose": "Įvertinti geriausios kokybės rekomendacijų variantą, kai taikomas išorinis LLM su saugikliais nuo perteklinių kvietimų.",
+      "command": "cd ~/network-thesis-GIT/src && source ~/network-thesis-GIT/.env && OPENAI_API_ALLOW_RUN=1 LOCAL_LLM_ENABLED=0 RECOMMENDATION_DELIVERY_ENABLED=1 OPENAI_API_ENABLED=1 python3 full_assessment.py",
+      "primary_metrics": ["openai_was_called", "estimated_input_chars", "estimated_output_chars", "recommendation_count", "structural_quality_score_avg", "mitre_mapping_coverage_percent", "cis_mapping_coverage_percent"]
+    }
+  ],
+  "figures_to_prepare": [
+    "Metodų struktūros kokybės palyginimas",
+    "Rekomendacijų skaičius pagal metodą",
+    "Vidutinis įrodymų, veiksmų ir patikrinimo žingsnių skaičius",
+    "Skenavimo trukmė ir energijos sąnaudos pagal profilį",
+    "Precision, Recall ir F1 pagal laboratorinius scenarijus"
+  ]
+}

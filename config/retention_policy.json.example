@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "dry_run": true,
+  "description": "Saugus duomenų rotacijos modelis. Pagal nutylėjimą dry_run=true, todėl niekas netrinama, tik sugeneruojama ataskaita.",
+  "rules": [
+    {"name": "endpoint_event_raw", "path": "endpoint_event_log", "days": 14, "patterns": ["*.jsonl"]},
+    {"name": "windows_security_raw", "path": "windows_security_log", "days": 14, "patterns": ["*.jsonl"]},
+    {"name": "eset_csv_raw", "path": "eset_csv_log", "days": 14, "patterns": ["*.csv", "*.jsonl"]},
+    {"name": "power_logs", "path": "runs", "days": 30, "patterns": ["**/power/*.csv"]},
+    {"name": "old_nmap_xml", "path": "runs", "days": 30, "patterns": ["**/*.xml"]},
+    {"name": "old_txt_outputs", "path": "runs", "days": 30, "patterns": ["**/*.txt"]}
+  ]
+}

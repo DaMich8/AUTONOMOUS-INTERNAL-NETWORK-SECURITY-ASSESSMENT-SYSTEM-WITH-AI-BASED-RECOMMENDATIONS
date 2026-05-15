@@ -1,0 +1,75 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Runtime outputs
+runs/
+latest/
+logs/
+reports/
+power_logs/
+cache/
+
+# Databases and state
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+state/
+*.jsonl
+
+# Endpoint / event raw logs
+windows_security_log/
+widows_security_log/
+endpoint_event_log/
+eset_csv_log/
+
+# Generated documents and archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+*.pdf
+*.docx
+*.eml
+*.xlsx
+*.csv
+
+# Temporary files
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Private environment variants
+.env.private
+.env.private.backup
+.env.local
+.env.secret
+.env.real
+.env.backup
+.env.*.backup
+
+# Allow anonymized env templates
+!.env
+!.env.example
+
+# Private runtime environment
+.env
+.env.example
+
+# Private runtime environment
+baseline/baseline_discovery_192_168_1_0_24.json
+baseline/baseline_services_192_168_1_0_24.json

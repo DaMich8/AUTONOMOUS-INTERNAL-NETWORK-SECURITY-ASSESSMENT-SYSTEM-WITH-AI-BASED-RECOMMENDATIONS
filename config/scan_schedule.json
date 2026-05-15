@@ -1,0 +1,60 @@
+{
+  "version": "1.1",
+  "description": "Automatinis full_assessment profilio parinkimas pagal vietinį Raspberry/Kali laiką. Dieną naudojamas švelnesnis balanced profilis, naktį - gilesnis deep profilis.",
+  "default_profile": "balanced",
+  "rules": [
+    {
+      "name": "night_deep",
+      "start": "22:00",
+      "end": "21:00",
+      "profile": "deep",
+      "description": "Naktinis langas išsamesniam auditui."
+    },
+    {
+      "name": "day_balanced",
+      "start": "21:01",
+      "end": "21:59",
+      "profile": "balanced",
+      "description": "Dienos režimas su mažesniu poveikiu tinklui."
+    }
+  ],
+  "profiles": {
+    "balanced": {
+      "SERVICE_SCAN_PROFILE": "balanced",
+      "SERVICE_SCAN_WORKERS": "3",
+      "SERVICE_SCAN_MIN_RATE": "400",
+      "SERVICE_SCAN_HOST_TIMEOUT": "4m",
+      "SERVICE_SCAN_VERSION_TIMEOUT": "3m",
+      "WEB_DEEP_PROFILE": "balanced",
+      "WEB_DEEP_WORKERS": "2",
+      "WEB_DEEP_RUN_TOOLS_PARALLEL": "1",
+      "WEB_DEEP_NIKTO": "1",
+      "WEB_DEEP_NIKTO_TIME": "35",
+      "WEB_DEEP_NMAP_SCRIPT_TIMEOUT": "10s",
+      "WEB_DEEP_NMAP_HOST_TIMEOUT": "60s",
+      "UDP_TOP_PORTS": "20",
+      "PARALLEL_ENRICHMENT_WORKERS": "4"
+    },
+    "deep": {
+      "SERVICE_SCAN_PROFILE": "deep",
+      "SERVICE_SCAN_WORKERS": "6",
+      "SERVICE_SCAN_MIN_RATE": "1200",
+      "SERVICE_SCAN_HOST_TIMEOUT": "5m",
+      "SERVICE_SCAN_VERSION_TIMEOUT": "4m",
+      "WEB_DEEP_PROFILE": "deep",
+      "WEB_DEEP_WORKERS": "4",
+      "WEB_DEEP_RUN_TOOLS_PARALLEL": "1",
+      "WEB_DEEP_NIKTO": "1",
+      "WEB_DEEP_NIKTO_TIME": "120",
+      "WEB_DEEP_NMAP_SCRIPT_TIMEOUT": "25s",
+      "WEB_DEEP_NMAP_HOST_TIMEOUT": "120s",
+      "UDP_TOP_PORTS": "50",
+      "PARALLEL_ENRICHMENT_WORKERS": "4"
+    }
+  },
+  "manual_override_environment": {
+    "FORCE_SCAN_PROFILE": "balanced arba deep - priverstinai parenka profilį, ignoruojant laiką",
+    "DISABLE_AUTO_PROFILE": "1 - išjungia automatinį profilio parinkimą",
+    "DISABLE_PARALLEL_ENRICHMENT": "1 - enrichment modulius vykdo nuosekliai"
+  }
+}

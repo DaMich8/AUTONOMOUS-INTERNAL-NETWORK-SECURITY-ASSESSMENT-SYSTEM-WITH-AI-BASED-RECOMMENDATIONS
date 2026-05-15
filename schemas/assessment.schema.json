@@ -1,0 +1,1 @@
+{"type":"object","required":["hosts"],"properties":{"hosts":{"type":"array"}}}

@@ -1,0 +1,42 @@
+{
+  "pipeline_checks": {
+    "enabled": true,
+    "description": "Automatinės patikros, kurios tikrina, ar uždaras ciklas sugeneravo pagrindinius artefaktus ir ar risk_score yra 0–100."
+  },
+  "lab_scenarios": [
+    {
+      "enabled": false,
+      "id": "LAB_RDP_BRUTE_FORCE",
+      "name": "Atviras RDP ir nesėkmingi prisijungimai",
+      "target_ip": "192.168.1.25",
+      "expected_vulnerability": "RDP paslauga pasiekiama ir endpoint loguose matomi failed logon įvykiai.",
+      "expectations": [
+        {"type": "open_tcp_port", "port": 3389, "description": "Hoste turi būti atviras RDP 3389/tcp."},
+        {"type": "correlation_rule_present", "rule_id": "rdp_failed_logons", "description": "Turi atsirasti RDP + failed logons koreliacija."},
+        {"type": "recommendation_contains", "text": "RDP", "description": "Rekomendacijoje turi būti RDP ribojimo veiksmai."},
+        {"type": "risk_level_at_least", "min_level": "aukšta", "description": "Rizikos lygis turi būti bent aukštas."}
+      ]
+    },
+    {
+      "enabled": false,
+      "id": "LAB_SNMP_PUBLIC",
+      "name": "SNMP public/private community",
+      "target_ip": "192.168.1.254",
+      "expected_vulnerability": "SNMP atsako su public/private community.",
+      "expectations": [
+        {"type": "correlation_rule_present", "rule_id": "snmp_default_community", "description": "Turi būti aptikta SNMP default community koreliacija."},
+        {"type": "recommendation_contains", "text": "SNMP", "description": "Rekomendacijoje turi būti SNMP apribojimas arba SNMPv3."}
+      ]
+    },
+    {
+      "enabled": false,
+      "id": "LAB_CVE_EPSS_KEV",
+      "name": "CVE praturtinimas EPSS/KEV",
+      "target_ip": "192.168.1.10",
+      "expected_vulnerability": "Hosto assessment faile yra konkretus CVE, kuris turi būti praturtintas EPSS arba KEV duomenimis.",
+      "expectations": [
+        {"type": "cve_enriched", "cve": "CVE-2021-44228", "require_epss": true, "require_kev": false, "description": "CVE turi turėti EPSS lauką."}
+      ]
+    }
+  ]
+}
